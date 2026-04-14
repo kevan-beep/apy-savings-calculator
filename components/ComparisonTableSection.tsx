@@ -1,64 +1,59 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import type { Offer } from "@/lib/offers";
+import Link from "next/link";
 import type { RatesApiResponse } from "@/lib/rates/types";
 import { RateDisclaimer } from "@/components/RateDisclaimer";
 
-const TIER_LABELS = [
-  "Top Pick — Online Bank",
-  "Strong Option — Online Bank",
-  "Solid Choice — Online Bank",
+const TABLE_ROWS = [
+  {
+    tierLabel: "Traditional Bank",
+    apyDisplay: "0.01% – 0.10%",
+    keyFeature: "Branch access, familiarity",
+    learnMoreHref: "#traditional-banks",
+    insuranceBadge: (
+      <span
+        title="FDIC insured products"
+        className="ml-2 inline-flex items-center rounded-full bg-brand-black px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-gold ring-1 ring-brand-gold/40"
+      >
+        FDIC
+      </span>
+    ),
+  },
+  {
+    tierLabel: "Online Bank",
+    apyDisplay: "4.00% – 5.00%",
+    keyFeature: "Highest rates, no fees",
+    learnMoreHref: "#online-banks",
+    insuranceBadge: (
+      <span
+        title="FDIC insured products"
+        className="ml-2 inline-flex items-center rounded-full bg-brand-black px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-gold ring-1 ring-brand-gold/40"
+      >
+        FDIC
+      </span>
+    ),
+  },
+  {
+    tierLabel: "Credit Union",
+    apyDisplay: "3.50% – 4.75%",
+    keyFeature: "Member-owned, personal service",
+    learnMoreHref: "#credit-unions",
+    insuranceBadge: (
+      <span
+        title="NCUA insured products"
+        className="ml-2 inline-flex items-center rounded-full bg-brand-black px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-gold ring-1 ring-brand-gold/40"
+      >
+        NCUA
+      </span>
+    ),
+  },
 ] as const;
 
-function FdicBadge({
-  cert,
-  initialVerified,
-}: {
-  cert: string;
-  initialVerified: boolean;
-}) {
-  const [verified, setVerified] = useState(initialVerified);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch(`/api/verify-fdic/${encodeURIComponent(cert)}`)
-      .then((r) => r.json())
-      .then((d: { verified?: boolean }) => {
-        if (cancelled || typeof d.verified !== "boolean") return;
-        setVerified(d.verified);
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  }, [cert]);
-
-  return verified ? (
-    <span
-      title="FDIC Insured ✓"
-      className="ml-2 inline-flex items-center rounded-full bg-brand-black px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-gold ring-1 ring-brand-gold/40"
-    >
-      FDIC Insured ✓
-    </span>
-  ) : (
-    <span className="ml-2 inline-flex items-center rounded-full bg-brand-surface px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-muted ring-1 ring-brand-surface">
-      FDIC status unavailable
-    </span>
-  );
-}
-
 export function ComparisonTableSection({
-  offers,
   rates,
   lastVerifiedLabel,
 }: {
-  offers: Offer[];
   rates: RatesApiResponse;
   lastVerifiedLabel: string;
 }) {
-  const certByName = new Map(rates.banks.map((b) => [b.name, b]));
-
   return (
     <section
       id="compare"
@@ -91,49 +86,39 @@ export function ComparisonTableSection({
               </tr>
             </thead>
             <tbody className="divide-y divide-brand-surface bg-brand-card">
-              {offers.map((o, index) => {
-                const bank = certByName.get(o.name);
-                const cert = bank?.fdicCertNumber ?? "";
-                const tierLabel =
-                  TIER_LABELS[index] ?? `Option ${index + 1} — Online Bank`;
-                return (
-                  <tr
-                    key={o.name}
-                    className="text-brand-bone transition-colors hover:bg-brand-surface/60"
-                  >
-                    <td className="px-4 py-4 font-medium sm:px-6">
-                      <span className="inline-flex flex-wrap items-center gap-y-1">
-                        {tierLabel}
-                        {cert ? (
-                          <FdicBadge
-                            cert={cert}
-                            initialVerified={Boolean(bank?.fdicVerified)}
-                          />
-                        ) : null}
-                      </span>
-                    </td>
-                    <td className="px-4 py-4 sm:px-6">
-                      <span className="font-semibold text-brand-bone">
-                        Up to {o.apy.toFixed(2)}%
-                      </span>
-                      <div className="mt-2 max-w-xs">
-                        <RateDisclaimer className="text-brand-muted" />
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-brand-muted sm:px-6">
-                      {o.tableFeature}
-                    </td>
-                    <td className="px-4 py-4 sm:px-6">
-                      <a
-                        href={o.affiliateLink}
-                        className="font-semibold text-brand-gold hover:text-brand-bone"
-                      >
-                        Learn More →
-                      </a>
-                    </td>
-                  </tr>
-                );
-              })}
+              {TABLE_ROWS.map((row) => (
+                <tr
+                  key={row.tierLabel}
+                  className="text-brand-bone transition-colors hover:bg-brand-surface/60"
+                >
+                  <td className="px-4 py-4 font-medium sm:px-6">
+                    <span className="inline-flex flex-wrap items-center gap-y-1">
+                      {row.tierLabel}
+                      {row.insuranceBadge}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4 sm:px-6">
+                    <span className="font-semibold text-brand-bone">
+                      {row.apyDisplay}
+                    </span>
+                    <div className="mt-2 max-w-xs">
+                      <RateDisclaimer className="text-brand-muted" />
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-brand-muted sm:px-6">
+                    {row.keyFeature}
+                  </td>
+                  <td className="px-4 py-4 sm:px-6">
+                    <Link
+                      href={row.learnMoreHref}
+                      scroll={true}
+                      className="font-semibold text-brand-gold hover:text-brand-bone"
+                    >
+                      Learn More →
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

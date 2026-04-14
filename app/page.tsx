@@ -3,6 +3,9 @@ import Link from "next/link";
 import { CalculatorSection } from "@/components/CalculatorSection";
 import { ComparisonTableSection } from "@/components/ComparisonTableSection";
 import { EmailCapture } from "@/components/EmailCapture";
+import { CreditUnionReport } from "@/components/reports/CreditUnionReport";
+import { OnlineBankReport } from "@/components/reports/OnlineBankReport";
+import { TraditionalBankReport } from "@/components/reports/TraditionalBankReport";
 import {
   BANK_RATE_CONFIG,
   bankConfigToOffers,
@@ -54,10 +57,19 @@ export default async function HomePage() {
       </section>
 
       <ComparisonTableSection
-        offers={offers}
         rates={rates}
         lastVerifiedLabel={lastVerifiedLabel}
       />
+
+      <TraditionalBankReport />
+      <div className="bg-brand-surface px-4" aria-hidden>
+        <div className="mx-auto h-px max-w-5xl bg-brand-gold/40" />
+      </div>
+      <OnlineBankReport />
+      <div className="bg-brand-surface px-4" aria-hidden>
+        <div className="mx-auto h-px max-w-5xl bg-brand-gold/40" />
+      </div>
+      <CreditUnionReport />
 
       <section className="bg-brand-black py-14 text-center">
         <EmailCapture />

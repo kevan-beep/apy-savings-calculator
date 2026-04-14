@@ -1,0 +1,203 @@
+import Link from "next/link";
+
+const PROS = [
+  "Highest savings rates available",
+  "Typically no monthly fees",
+  "No minimum balance requirements",
+  "Easy mobile account management",
+  "FDIC insured same as traditional banks",
+];
+
+const CONS = [
+  "No physical branches",
+  "Cash deposits can be difficult",
+  "May feel less familiar",
+  "Customer service is phone or chat only",
+  "No in-person relationship",
+];
+
+const TOP_INSTITUTIONS: {
+  name: string;
+  rate: string;
+  feature: string;
+}[] = [
+  { name: "SoFi Bank", rate: "Up to 4.50%", feature: "No minimum balance, FDIC insured" },
+  {
+    name: "Marcus by Goldman Sachs",
+    rate: "Up to 4.40%",
+    feature: "No fees ever, Goldman backing",
+  },
+  { name: "Ally Bank", rate: "Up to 4.35%", feature: "No minimum, excellent mobile app" },
+  { name: "Discover Bank", rate: "Up to 4.25%", feature: "No fees, strong customer service" },
+  {
+    name: "American Express HYSA",
+    rate: "Up to 4.25%",
+    feature: "Trusted brand, no fees",
+  },
+  { name: "Synchrony Bank", rate: "Up to 4.50%", feature: "Consistently competitive rates" },
+  { name: "Barclays Online", rate: "Up to 4.35%", feature: "Simple, no-frills high yield" },
+  { name: "Capital One 360", rate: "Up to 4.10%", feature: "Strong app, hybrid model" },
+  { name: "Bread Financial", rate: "Up to 4.50%", feature: "High rates, simple product" },
+  { name: "UFB Direct", rate: "Up to 4.55%", feature: "Among highest rates available" },
+  { name: "EverBank", rate: "Up to 4.30%", feature: "Competitive, established online bank" },
+  { name: "Laurel Road", rate: "Up to 4.40%", feature: "Strong for professionals" },
+  { name: "My Banking Direct", rate: "Up to 4.50%", feature: "High rates, straightforward" },
+  { name: "Bask Bank", rate: "Up to 4.45%", feature: "Competitive HYSA" },
+  { name: "LendingClub Bank", rate: "Up to 4.40%", feature: "Solid online option" },
+  { name: "Varo Bank", rate: "Up to 4.00%", feature: "Mobile-first, no fees" },
+  { name: "Axos Bank", rate: "Up to 4.25%", feature: "Full online banking suite" },
+  { name: "CIT Bank", rate: "Up to 4.35%", feature: "Established online institution" },
+  { name: "TAB Bank", rate: "Up to 4.40%", feature: "Competitive rates" },
+  {
+    name: "Western Alliance Bank",
+    rate: "Up to 4.40%",
+    feature: "Strong institutional backing",
+  },
+];
+
+export function OnlineBankReport() {
+  return (
+    <section
+      id="online-banks"
+      className="scroll-mt-28 bg-brand-surface py-16 px-4"
+    >
+      <div className="mx-auto max-w-5xl space-y-10">
+        <header>
+          <h2 className="font-condensed text-3xl font-bold text-brand-bone sm:text-4xl">
+            Online Banks — Full Report
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-brand-muted sm:text-base">
+            Branchless FDIC-insured banks that compete mainly on APY, fees, and
+            digital experience — and what you give up versus brick-and-mortar.
+          </p>
+        </header>
+
+        <div className="rounded-lg bg-brand-card p-6">
+          <h3 className="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
+            What Is an Online Bank?
+          </h3>
+          <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+            Online banks operate entirely over the internet with no physical
+            branches. Because they have dramatically lower overhead than
+            traditional banks, they pass those savings to customers in the form
+            of significantly higher interest rates. All legitimate online banks
+            are FDIC insured up to $250,000.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-lg bg-brand-card p-6">
+            <h3 className="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-brand-bone">
+              PROS
+            </h3>
+            <ul className="mt-4 space-y-2 text-sm text-brand-bone">
+              {PROS.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="shrink-0 text-brand-emerald" aria-hidden>
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-lg bg-brand-card p-6">
+            <h3 className="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-brand-bone">
+              CONS
+            </h3>
+            <ul className="mt-4 space-y-2 text-sm text-brand-bone">
+              {CONS.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="shrink-0 text-brand-orange" aria-hidden>
+                    ✕
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-brand-card p-6">
+          <p className="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
+            BEST FOR
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-brand-bone">
+            Anyone comfortable managing money digitally who wants to maximize
+            what their savings earns. Ideal for emergency funds and long-term
+            savings goals.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-brand-card p-6">
+          <h3 className="font-condensed text-sm font-semibold text-brand-bone">
+            Current rate range
+          </h3>
+          <p className="mt-2 text-sm text-brand-bone">
+            4.00% – 5.00% APY on high-yield savings accounts
+          </p>
+          <p className="mt-4 text-xs text-brand-muted">
+            Source: Federal Reserve H.15 / FDIC BankFind
+          </p>
+          <p className="mt-2 text-xs text-brand-muted">
+            Rates change frequently. Verify before opening any account.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-dashed border-brand-muted/50 bg-brand-surface p-8 text-center">
+          <p className="text-sm text-brand-muted">
+            Featured Partner Slot — Available
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-brand-muted">
+            Institutions may apply for featured placement. Featured status is
+            clearly disclosed and does not affect our data rankings.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="font-condensed text-2xl font-bold text-brand-bone sm:text-3xl">
+            Top Institutions by Savings Rate
+          </h3>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-brand-muted">
+            Ranked by advertised APY. All institutions on this list are verified
+            FDIC/NCUA insured. Data sourced from public regulatory filings.
+          </p>
+          <div className="mt-6 overflow-hidden rounded-lg border border-brand-surface bg-brand-card">
+            <ul className="divide-y divide-brand-surface">
+              {TOP_INSTITUTIONS.map((row, i) => (
+                <li
+                  key={row.name}
+                  className={`flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 ${
+                    i % 2 === 1 ? "bg-brand-surface" : "bg-brand-card"
+                  }`}
+                >
+                  <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
+                    <span className="shrink-0 font-condensed text-sm font-bold text-brand-gold">
+                      {i + 1}.
+                    </span>
+                    <span className="font-medium text-brand-bone">{row.name}</span>
+                    <span className="text-sm text-brand-muted">{row.rate}</span>
+                    <span className="text-sm text-brand-muted">{row.feature}</span>
+                    <span className="inline-flex w-fit items-center rounded-full bg-brand-black px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-gold ring-1 ring-brand-gold/40">
+                      FDIC verified
+                    </span>
+                  </div>
+                  <Link
+                    href="#"
+                    className="shrink-0 text-sm font-semibold text-brand-gold hover:text-brand-bone"
+                  >
+                    Learn More →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-6 text-xs leading-relaxed text-brand-muted">
+            Data last updated: April 2026. This list is compiled from public FDIC
+            BankFind and NCUA data. It is not a paid ranking.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}

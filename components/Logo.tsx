@@ -1,7 +1,7 @@
 function TrendIcon() {
   return (
     <svg
-      className="h-5 w-5 shrink-0 text-brand-gold"
+      className="h-7 w-7 shrink-0 text-brand-gold"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ function TrendIcon() {
 
 export function Logo() {
   return (
-    <div className="group flex items-center gap-2 text-lg font-bold tracking-tight text-brand-gold font-condensed">
+    <div className="group flex items-center gap-2 font-condensed text-2xl font-bold tracking-tight text-brand-gold">
       <TrendIcon />
       <span>
         APY <span className="text-brand-gold">Calculator</span>
