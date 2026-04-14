@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Offer } from "@/lib/offers";
 import { getPrimaryOffer } from "@/lib/offers";
 import { RateDisclaimer } from "./RateDisclaimer";
@@ -35,11 +35,32 @@ export function CalculatorSection({ offers }: { offers: Offer[] }) {
   const primary = useMemo(() => getPrimaryOffer(offers), [offers]);
 
   const [balanceInput, setBalanceInput] = useState("10000");
-  const [apyInput, setApyInput] = useState("0.01");
+  const [apyInput, setApyInput] = useState("0.46");
+  const [ratesLoaded, setRatesLoaded] = useState(false);
   const [timeframe, setTimeframe] = useState<TimeframeYears>(1);
   const [showResult, setShowResult] = useState(false);
   const [bankEarn, setBankEarn] = useState(0);
   const [betterEarn, setBetterEarn] = useState(0);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/rates")
+      .then((r) => r.json())
+      .then((data: { nationalAverageSavingsAPY?: number }) => {
+        if (cancelled) return;
+        const n = data.nationalAverageSavingsAPY;
+        if (typeof n === "number" && Number.isFinite(n)) {
+          setApyInput(n.toFixed(2));
+        }
+        setRatesLoaded(true);
+      })
+      .catch(() => {
+        if (!cancelled) setRatesLoaded(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   function parseBalance(raw: string): number {
     const n = Number(String(raw).replace(/[^0-9.]/g, ""));
@@ -139,6 +160,12 @@ export function CalculatorSection({ offers }: { offers: Offer[] }) {
                   %
                 </span>
               </div>
+              {ratesLoaded ? (
+                <p className="mt-1.5 text-xs text-slate-500">
+                  Pre-filled with current national average savings rate from the
+                  Federal Reserve
+                </p>
+              ) : null}
             </div>
             <div>
               <label
