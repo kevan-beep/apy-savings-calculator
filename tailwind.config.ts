@@ -11,9 +11,23 @@ const config: Config = {
       colors: {
         navy: "#0F172A",
         brand: {
+          black: "#0D0F0E",
+          surface: "#1A1D1B",
+          card: "#222722",
+          gold: "#C9A85C",
+          bone: "#F2EDE4",
+          muted: "#8A9088",
           emerald: "#10B981",
-          slate: "#64748B",
+          orange: "#f97316",
         },
+      },
+      fontFamily: {
+        sans: ["var(--font-barlow)", "system-ui", "sans-serif"],
+        condensed: [
+          "var(--font-barlow-condensed)",
+          "var(--font-barlow)",
+          "sans-serif",
+        ],
       },
     },
   },

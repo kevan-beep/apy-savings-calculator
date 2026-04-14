@@ -29,16 +29,16 @@ export function CookieConsent() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white p-4 shadow-lg sm:p-5"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-brand-surface bg-brand-surface p-4 text-center shadow-lg sm:p-5"
       role="dialog"
       aria-label="Cookie notice"
     >
-      <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm leading-relaxed text-slate-600">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 text-center sm:flex-row sm:justify-center sm:gap-6">
+        <p className="max-w-3xl text-sm leading-relaxed text-brand-bone">
           We use cookies and similar technologies to remember your preferences,
           measure traffic, and support affiliate disclosures required by law.
           By continuing, you agree to our use of cookies as described in our{" "}
-          <Link href="/privacy" className="text-emerald-600 underline">
+          <Link href="/privacy" className="text-brand-gold underline hover:text-brand-bone">
             Privacy Policy
           </Link>
           .
@@ -46,7 +46,7 @@ export function CookieConsent() {
         <button
           type="button"
           onClick={accept}
-          className="shrink-0 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
+          className="shrink-0 rounded-lg bg-brand-gold px-5 py-2.5 font-condensed text-sm font-bold text-brand-black transition hover:opacity-90"
         >
           Accept
         </button>

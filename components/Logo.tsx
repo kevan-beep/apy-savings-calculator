@@ -1,9 +1,7 @@
-import Link from "next/link";
-
 function TrendIcon() {
   return (
     <svg
-      className="h-5 w-5 shrink-0 text-emerald-500"
+      className="h-5 w-5 shrink-0 text-brand-gold"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -27,16 +25,13 @@ function TrendIcon() {
   );
 }
 
-export function Logo({ href = "/" }: { href?: string }) {
+export function Logo() {
   return (
-    <Link
-      href={href}
-      className="group flex items-center gap-2 text-lg font-semibold tracking-tight text-slate-900"
-    >
+    <div className="group flex items-center gap-2 text-lg font-bold tracking-tight text-brand-gold font-condensed">
       <TrendIcon />
       <span>
-        APY <span className="text-slate-700">Calculator</span>
+        APY <span className="text-brand-gold">Calculator</span>
       </span>
-    </Link>
+    </div>
   );
 }
