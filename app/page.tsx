@@ -56,6 +56,19 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <p className="text-center text-brand-muted text-sm mt-8 mb-2">
+        Not sure where to start? Learn how each account type works before
+        comparing rates.
+      </p>
+      <div className="flex justify-center mt-6 mb-10">
+        <a
+          href="#traditional-banks"
+          className="inline-flex items-center gap-2 border border-brand-gold text-brand-gold font-condensed font-bold text-lg px-8 py-3 rounded hover:bg-brand-gold hover:text-brand-black transition-all duration-200"
+        >
+          📚 Educate Yourself First →
+        </a>
+      </div>
+
       <ComparisonTableSection
         rates={rates}
         lastVerifiedLabel={lastVerifiedLabel}
