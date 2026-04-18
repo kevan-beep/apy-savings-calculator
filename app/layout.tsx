@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import { CookieConsent } from "@/components/CookieConsent";
@@ -60,6 +61,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );
