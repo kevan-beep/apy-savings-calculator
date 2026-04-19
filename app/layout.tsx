@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  other: {
+    "impact-site-verification": "ed7e4b31-ee5a-415c-ac46-5515b7a3d2d4",
+  },
 };
 
 export default function RootLayout({
